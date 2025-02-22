@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { getPusherInstance } from '@/libs/pusher/server';
 const pusherServer = getPusherInstance();
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
     const { channelName } = await req.json();
     try {
         await new Promise<void>((resolve) => {

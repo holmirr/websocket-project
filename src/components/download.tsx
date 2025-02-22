@@ -1,12 +1,12 @@
 "use client";
 import { pusherClient } from "@/libs/pusher/client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 export default function Download() {
   const [channelName, setChannelName] = useState<string>("");
   useEffect(() => {
     if (!channelName) return;
     pusherClient.subscribe(channelName);
-    pusherClient.bind("evt::test", (data: any) => {
+    pusherClient.bind("evt::test", (data: string) => {
       console.log(data);
     });
     return () => {
@@ -23,6 +23,7 @@ export default function Download() {
       body: JSON.stringify({ channelName }),
     });
     const data = await res.json();
+    console.log(data);
   };
 
   const handleCancel = () => {
